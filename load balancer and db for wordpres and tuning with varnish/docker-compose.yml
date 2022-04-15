@@ -1,0 +1,136 @@
+version: "3.4"
+services:
+ #MySql db
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    expose:
+      - "3306" 
+    networks:
+      project:
+        aliases:
+          - db
+
+ #Wordpress servers 
+  wp-1:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - ./wdata/wordpress_data:/var/www/html
+      - ./wdata/uploads:/var/www/wp-content/uploads
+    expose:
+      - "80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    networks:
+      project:
+        aliases:
+          - wp-1
+ 
+  wp-2:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - ./wdata/wordpress_data:/var/www/html
+      - ./wdata/uploads:/var/www/wp-content/uploads  
+    expose:
+      - "80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    networks:
+      project:      
+        aliases:          
+          - wp-2
+
+  #Wp accelerator          
+  vn-1:
+    image: varnish:stable
+    volumes:
+      - "./default.2.vcl:/etc/varnish/default.vcl"
+    expose:
+      - "80"
+    tmpfs:
+      - /var/lib/varnish:exec
+    environment:
+      - VARNISH_SIZE=500M  
+    command: "-p default_keep=300"
+    depends_on:
+      - "wp-1"
+    networks:
+      project:
+        aliases:
+          - vn-1               
+  
+  vn-2:
+    image: varnish:stable
+    volumes:
+      - "./default.2.vcl:/etc/varnish/default.vcl"
+    expose:
+      - "80"
+    tmpfs:
+      - /var/lib/varnish:exec
+    environment:
+      - VARNISH_SIZE=500M  
+    command: "-p default_keep=300"
+    depends_on:
+      - "wp-2"
+    networks:
+      project:
+        aliases:
+          - vn-2
+
+  #Db manager.
+  pma:
+    image: phpmyadmin
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "90:80"
+    environment:
+      - PMA_HOST=db  
+      - PMA_USER=wordpress
+      - PMA_PASSWORD=wordpress
+    networks:
+      project:      
+        aliases:
+          - pma
+
+  #Load balancer.
+  router:
+    image: nginx
+    depends_on:
+      - "vn-1"
+      - "vn-2"
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      project:
+        aliases:
+          - ng-lb
+
+#Local network.
+networks:
+  project:
+    driver: bridge
+    ipam:
+      driver: default
