@@ -24,3 +24,5 @@ docker-compose: This file has the following features:
 
 
 This porject  will create his own network to operate localy. 
+
+WORK IN PROGRESS
