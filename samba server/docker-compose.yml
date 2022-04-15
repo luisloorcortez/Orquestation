@@ -15,3 +15,12 @@ services:
       #- "445:445/tcp"
     volumes:
       - ../../shared:/media
+    networks:
+      samba:
+        aliases:
+          - samba
+networks:
+  samba:
+    driver: bridge
+    ipam:
+      driver: default
