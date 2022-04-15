@@ -1,50 +1,50 @@
 version: '3.4'
 services:  
   #Servers
-  web-1:
+  host-1:
     image: nginx
-    ports:
-      - "60:80"  
+    expose:
+      - "80"  
     volumes:
       - ./services/index.1.html:/usr/share/nginx/html/index.html
     networks: 
       project:
         aliases:
-          - web-1
+          - host-1
             
-  web-2:
+  host-2:
     image: nginx
-    ports:
-      - "70:80"
+    expose:
+      - "80"
     volumes:
       - ./services/index.2.html:/usr/share/nginx/html/index.html
     networks: 
       project:
         aliases:
-          - web-2
+          - host-2
  
-  web-3:
+  host-3:
     image: nginx
-    ports:
-      - "80:80"
+    expose:
+      - "80"
     volumes:
       - ./services/index.3.html:/usr/share/nginx/html/index.html
     networks: 
       project:
         aliases:
-          - web-3
+          - host-3
 
   #Load balancer 
-  router:
+  proxy:
     image: nginx
     ports:
-      - "90:80"
+      - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
-      - "web-1"      
-      - "web-2"     
-      - "web-3"      
+      - "host-1"      
+      - "host-2"     
+      - "host-3"      
     networks: 
       project:
         aliases:
