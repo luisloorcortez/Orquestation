@@ -1,4 +1,4 @@
-# nginx load balancer and db for worpress.
+# nginx load balancer and db for wordress.
 ## In this folder you can find the faollowing files:
 
 ### docker-compose: This file has the following features:
