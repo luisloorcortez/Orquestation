@@ -1,7 +1,7 @@
-tuning wordpress image with vasrnish
+# tuning wordpress image with vasrnish
 
-in this folder you can find:
-docker-compose: This file has the following features:
+## in this folder you can find:
+### docker-compose: This file has the following features:
                1.-  db MySql this be used for the wordpress image below.
                     This image was programmed with the basic, such as: user, password, name db, root pasdword.
                     The port of exposure was configured to operate within  the docker network, this will be created later.
@@ -21,6 +21,5 @@ docker-compose: This file has the following features:
                     for more information, see:
                  
                     curl: https://hub.docker.com/r/phpmyadmin/phpmyadmin/
-
-
-This porject  will create his own network to operate localy. 
+               
+               5.-  This porject his own network to operate localy. 
