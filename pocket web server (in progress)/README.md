@@ -1,4 +1,4 @@
-# Tuning wordpress image with vasrnish
+# Pocket web server with wordpress image and vasrnish
 
 ## In this folder you will find:
 ### docker-compose: This file has the following features:
