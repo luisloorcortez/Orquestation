@@ -1,4 +1,4 @@
-# Nginx server an routing and load balancer.
+# Nginx server as routing and load balancer.
 ## In this nginx server project you can find:
 
           1- docker-compose: Inside you can find programed three nginx server image, they work as host.
