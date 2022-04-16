@@ -1,5 +1,5 @@
 # nginx load balancer and db for worpress.
-## in this folder you can find the faollowing files:
+## in this folder you can find the following files:
 
 docker-compose: This file has the following features:
                 
