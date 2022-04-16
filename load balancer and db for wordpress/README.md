@@ -30,6 +30,6 @@
             6.- Local network for the project, in this way, all its images work on the same network.
 
 ### Other files in the root path
-            nginx.conf: este archivo tiene dentro la configuración predeterminada para el balanceador de carga.
-            db_data: esta carpeta tiene dentro los datos generados por el contenedor db.
-            wdata: Este forlder tiene en su interior datos generados por los contenedores de wordpress.
+            1.- nginx.conf: este archivo tiene dentro la configuración predeterminada para el balanceador de carga.
+            2.- db_data: esta carpeta tiene dentro los datos generados por el contenedor db.
+            3.- wdata: Este forlder tiene en su interior datos generados por los contenedores de wordpress.
