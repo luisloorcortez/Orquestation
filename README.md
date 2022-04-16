@@ -6,7 +6,7 @@
   - docker-compose
   - docker hub
   - etc.
-- Kubernertes in varios versions:
+- Kubernetes in varios versions:
   - k0s
   - minikube
   - k8s
