@@ -1,4 +1,4 @@
-# tuning wordpress image with vasrnish
+# Tuning wordpress image with vasrnish
 
 ## in this folder you can find:
 ### docker-compose: This file has the following features:
