@@ -1,6 +1,6 @@
 # Pocket web server with wordpress image and vasrnish
 
-## In this folder you will find on the future :):
+## In this folder you will find at the future :):
 ### docker-compose: This file has the following features:
                1.-  db MySql this be used for the wordpress image below.
                     This image was programmed with the basic, such as: user, password, name db, root pasdword.
