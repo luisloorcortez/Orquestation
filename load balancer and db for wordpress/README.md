@@ -5,17 +5,17 @@
                 
             #MySql
             1.- Mysql db container, programmed in the base state.
-            this has external folder for data persistence
+                this has external folder for data persistence
                 
             #Wordpress image
             2.- wordpress image, programmed in the base state, is linked to the db,
-            this has external folder for data persistence. This container shares the data with
-            the following wordpress container.
+                this has external folder for data persistence. This container shares the data with
+                the following wordpress container.
 
             #Wordpress image
             3.- wordpress image, programmed in the base state, has been linked to the db,
-            this has external folder for data persistence. This container shares the data with
-            the old wordpress container.
+                this has external folder for data persistence. This container shares the data with
+                the old wordpress container.
 
             *As you can see, wordpress containers are clones, they take their data from the same external folder,
             They will be used by the load balancer...
@@ -25,7 +25,7 @@
 
             #Nginx
             5.- Image of nginx as load balancer, it has its external file configured, for data persistence and it is
-            linked with your wordress images. You know, send requests between wordpress containers.
+                linked with your wordress images. You know, send requests between wordpress containers.
 
             6.- Local network for the project, in this way, all its images work on the same network.
 
