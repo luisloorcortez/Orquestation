@@ -17,7 +17,7 @@
  
                     curl: https://www.varnish-software.com/developers/tutorials/running-varnish-docker/
 
-               4.-  phpMyAdmin image, this will be used such as db administrator. This is linhed with db image thrpugh the docker network. 
+               4.-  phpMyAdmin image, this will be used such as db administrator. This is linked with db image through the docker network. 
                     for more information, see:
                  
                     curl: https://hub.docker.com/r/phpmyadmin/phpmyadmin/
