@@ -1,4 +1,4 @@
-# Docker samba server
+# Docker samba Server
 
 ## In this folder you will find:
 ### docker-compose: This file has the following features:
