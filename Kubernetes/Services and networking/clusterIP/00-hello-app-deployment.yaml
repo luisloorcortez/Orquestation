@@ -1,0 +1,47 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: hello
+  labels:
+    name: test
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+  namespace: hello
+  labels:
+    role: hello
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      role: hello
+      tier: web
+  template:
+    metadata:
+      labels:
+        role: hello
+        tier: web
+    spec:
+      containers:
+      - name: hello
+        image: gcr.io/google-samples/hello-app:2.0
+        imagePullPolicy: IfNotPresent        
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+  namespace: hello
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    role: hello
