@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: samba
+  name: samba
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: samba
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: samba
+    spec:
+      containers:
+        - args:
+            - -u
+            - lu;plastika
+            - -s
+            - compartido;/media;yes;no;yes
+          env:
+            - name: TZ
+              value: ECUADOR/GUAYAQUIL
+          image: dperson/samba
+          name: samba
+          ports:
+            - containerPort: 137
+              protocol: UDP
+            - containerPort: 138
+              protocol: UDP
+            - containerPort: 139
+          resources: {}
+          stdin: true
+          tty: true
+          volumeMounts:
+            - mountPath: /media
+              name: samba-claim0
+      restartPolicy: Always
+      volumes:
+        - name: samba-claim0
+          persistentVolumeClaim:
+            claimName: samba-claim0
+status: {}

@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+    traefik.backend: nginx
+    traefik.frontend.rule: Host:www.,
+    traefik.port: "80"
+  creationTimestamp: null
+  labels:
+    io.kompose.service: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+        traefik.backend: nginx
+        traefik.frontend.rule: Host:www.,
+        traefik.port: "80"
+      creationTimestamp: null
+      labels:
+        io.kompose.network/proxy.: "true"
+        io.kompose.service: nginx
+    spec:
+      containers:
+        - image: nginx:latest
+          name: -nginx
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/www
+              name: nginx-claim0
+            - mountPath: /var/www/docker
+              name: nginx-claim1
+            - mountPath: /var/www/mysql
+              name: nginx-claim2
+            - mountPath: /etc/nginx/conf.d/default.conf
+              name: nginx-claim3
+            - mountPath: /var/log/nginx
+              name: nginx-claim4
+      restartPolicy: Always
+      volumes:
+        - name: nginx-claim0
+          persistentVolumeClaim:
+            claimName: nginx-claim0
+        - name: nginx-claim1
+          persistentVolumeClaim:
+            claimName: nginx-claim1
+        - name: nginx-claim2
+          persistentVolumeClaim:
+            claimName: nginx-claim2
+        - name: nginx-claim3
+          persistentVolumeClaim:
+            claimName: nginx-claim3
+        - name: nginx-claim4
+          persistentVolumeClaim:
+            claimName: nginx-claim4
+status: {}

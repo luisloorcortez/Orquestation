@@ -4,8 +4,7 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: hello
-  labels:
-    name: test
+
     
 #deployments - 2    
 ---

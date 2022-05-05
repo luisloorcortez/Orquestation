@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pma
+  name: pma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: pma
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/project: "true"
+        io.kompose.service: pma
+    spec:
+      containers:
+        - env:
+            - name: PMA_HOST
+              value: db
+            - name: PMA_PASSWORD
+              value: wordpress
+            - name: PMA_USER
+              value: wordpress
+          image: phpmyadmin
+          name: pma
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+status: {}
