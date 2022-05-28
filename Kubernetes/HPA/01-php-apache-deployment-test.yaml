@@ -1,0 +1,15 @@
+#dp    
+---
+apiVersion: apps/v1
+kind: pod
+metadata:
+  name: nginx-test
+  namespace: php-apache
+
+spec:
+  containers:
+  - name: nginx-test
+      image: nginx
+      ports:
+  - containerPort: 443
+
